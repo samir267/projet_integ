@@ -1,0 +1,12 @@
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+home:
+    path: /
+    controller: App\Controller\HomeController::index
+inscri:
+    path: /inscri
+    controller: App\Controller\InscriController::index
+inscription:
+    path: /inscription
+    controller: App\Controller\InscriptionController::index
