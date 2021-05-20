@@ -20,19 +20,9 @@ class Produit
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=50, nullable=true)
-     */
-    private $nom;
-
-    /**
-     * @ORM\Column(type="string", length=50, nullable=true)
-     */
-    private $prix;
-
-    /**
      * @ORM\Column(type="string", length=100, nullable=true)
      */
-    private $image;
+    private $nom;
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
@@ -40,22 +30,24 @@ class Produit
     private $categorie;
 
     /**
-     * @ORM\Column(type="string", length=100, nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      */
-    private $description;
+    private $image;
 
     /**
-     * @ORM\OneToMany(targetEntity=Panier::class, mappedBy="produit", orphanRemoval=true)
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    private $prix;
+
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    private $qtite;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Panier::class, mappedBy="Produit", orphanRemoval=true)
      */
     private $paniers;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=Admin::class, inversedBy="produit")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $admin;
-
-  
 
     public function __construct()
     {
@@ -79,14 +71,14 @@ class Produit
         return $this;
     }
 
-    public function getPrix(): ?string
+    public function getCategorie(): ?string
     {
-        return $this->prix;
+        return $this->categorie;
     }
 
-    public function setPrix(?string $prix): self
+    public function setCategorie(?string $categorie): self
     {
-        $this->prix = $prix;
+        $this->categorie = $categorie;
 
         return $this;
     }
@@ -103,26 +95,26 @@ class Produit
         return $this;
     }
 
-    public function getCategorie(): ?string
+    public function getPrix(): ?string
     {
-        return $this->categorie;
+        return $this->prix;
     }
 
-    public function setCategorie(?string $categorie): self
+    public function setPrix(?string $prix): self
     {
-        $this->categorie = $categorie;
+        $this->prix = $prix;
 
         return $this;
     }
 
-    public function getDescription(): ?string
+    public function getQtite(): ?string
     {
-        return $this->description;
+        return $this->qtite;
     }
 
-    public function setDescription(?string $description): self
+    public function setQtite(?string $qtite): self
     {
-        $this->description = $description;
+        $this->qtite = $qtite;
 
         return $this;
     }
@@ -156,20 +148,4 @@ class Produit
 
         return $this;
     }
-
-    public function getAdmin(): ?Admin
-    {
-        return $this->admin;
-    }
-
-    public function setAdmin(?Admin $admin): self
-    {
-        $this->admin = $admin;
-
-        return $this;
-    }
-
-   
-
-   
 }

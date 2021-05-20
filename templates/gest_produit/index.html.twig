@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+{% block title%} Admin{% endblock %}
+
+{% block body %}
+<h2>liste des produits</h2>
+  <a href="{{ path('new_jouet')}}" class="btn btn-primary" style="float:right"> ajouter un produit</a>
+    <a href="/admin" class="btn btn-primary" style="float:left"> retour au menu</a>
+
+
+ {% if prod %}
+    <table id="jouet" class="table table-striped">
+      <thead>
+       
+        <tr>
+          <th>id</th>
+          <th>categorie</th>
+          <th>quantite</th>
+          <th>prix</th>
+          <th>Gestion</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for prods in prod %}
+          <tr>
+            <td>{{ prods.id}}</td>
+            <td>{{prods.getCategorie()}}</td>
+            <td>{{prods.getQtite()}}</td>
+            <td>{{prods.getPrix()}}</td>
+
+          <td>
+            <a href="/gest/produit/edit/{{ prods.id }}" class="btn btn-outline-primary">Editer</a>
+
+            <a href="/gest/produit/delete/{{ prods.id }}" class="btn btn-outline-danger" 
+              onclick="return confirm('Etes-vous sûr de supprimer cet article?');">Supprimer</a>
+          </tr>
+          </td>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>Aucun article</p>
+  {% endif %} 
+  
+
+
+
+{% endblock %}
+
+
+
+
+
+

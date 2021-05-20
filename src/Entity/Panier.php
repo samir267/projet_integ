@@ -20,38 +20,29 @@ class Panier
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=100, nullable=true)
+     * @ORM\Column(type="string", length=50, nullable=true)
      */
-    private $quantite;
-
-    /**
-     * @ORM\Column(type="string", length=100, nullable=true)
-     */
-    private $montant_total;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $relation;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=produit::class, inversedBy="paniers")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $produit;
-
-    /**
-     * @ORM\OneToOne(targetEntity=client::class, inversedBy="panier", cascade={"persist", "remove"})
-     */
-    private $client;
+    private $qtite;
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
      */
-    private $methode_paiement;
+    private $somme;
 
     /**
-     * @ORM\OneToMany(targetEntity=Commande::class, mappedBy="panier", orphanRemoval=true)
+     * @ORM\OneToOne(targetEntity=Client::class, inversedBy="panier", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $Client;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Produit::class, inversedBy="paniers")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $Produit;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Commande::class, mappedBy="Panier", orphanRemoval=true)
      */
     private $commandes;
 
@@ -65,74 +56,50 @@ class Panier
         return $this->id;
     }
 
-    public function getQuantite(): ?string
+    public function getQtite(): ?string
     {
-        return $this->quantite;
+        return $this->qtite;
     }
 
-    public function setQuantite(?string $quantite): self
+    public function setQtite(?string $qtite): self
     {
-        $this->quantite = $quantite;
+        $this->qtite = $qtite;
 
         return $this;
     }
 
-    public function getMontantTotal(): ?string
+    public function getSomme(): ?string
     {
-        return $this->montant_total;
+        return $this->somme;
     }
 
-    public function setMontantTotal(?string $montant_total): self
+    public function setSomme(?string $somme): self
     {
-        $this->montant_total = $montant_total;
+        $this->somme = $somme;
 
         return $this;
     }
 
-    public function getRelation(): ?string
+    public function getClient(): ?Client
     {
-        return $this->relation;
+        return $this->Client;
     }
 
-    public function setRelation(string $relation): self
+    public function setClient(Client $Client): self
     {
-        $this->relation = $relation;
+        $this->Client = $Client;
 
         return $this;
     }
 
-    public function getProduit(): ?produit
+    public function getProduit(): ?Produit
     {
-        return $this->produit;
+        return $this->Produit;
     }
 
-    public function setProduit(?produit $produit): self
+    public function setProduit(?Produit $Produit): self
     {
-        $this->produit = $produit;
-
-        return $this;
-    }
-
-    public function getClient(): ?client
-    {
-        return $this->client;
-    }
-
-    public function setClient(?client $client): self
-    {
-        $this->client = $client;
-
-        return $this;
-    }
-
-    public function getMethodePaiement(): ?string
-    {
-        return $this->methode_paiement;
-    }
-
-    public function setMethodePaiement(?string $methode_paiement): self
-    {
-        $this->methode_paiement = $methode_paiement;
+        $this->Produit = $Produit;
 
         return $this;
     }

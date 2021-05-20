@@ -20,49 +20,29 @@ class Client
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=100, nullable=true)
+     * @ORM\Column(type="string", length=50, nullable=true)
      */
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
      */
-    private $prenom;
+    private $mail;
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
      */
-    private $login;
+    private $mdp;
 
     /**
-     * @ORM\Column(type="string", length=50, nullable=true)
-     */
-    private $email;
-
-    /**
-     * @ORM\Column(type="string", length=100, nullable=true)
-     */
-    private $adresse;
-
-    /**
-     * @ORM\OneToOne(targetEntity=Panier::class, mappedBy="client", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=Panier::class, mappedBy="Client", cascade={"persist", "remove"})
      */
     private $panier;
 
     /**
-     * @ORM\OneToMany(targetEntity=Commande::class, mappedBy="client", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Commande::class, mappedBy="Client", orphanRemoval=true)
      */
     private $commandes;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=Admin::class, inversedBy="client")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $admin;
-
-   
-
-   
 
     public function __construct()
     {
@@ -86,50 +66,26 @@ class Client
         return $this;
     }
 
-    public function getPrenom(): ?string
+    public function getMail(): ?string
     {
-        return $this->prenom;
+        return $this->mail;
     }
 
-    public function setPrenom(?string $prenom): self
+    public function setMail(?string $mail): self
     {
-        $this->prenom = $prenom;
+        $this->mail = $mail;
 
         return $this;
     }
 
-    public function getLogin(): ?string
+    public function getMdp(): ?string
     {
-        return $this->login;
+        return $this->mdp;
     }
 
-    public function setLogin(?string $login): self
+    public function setMdp(?string $mdp): self
     {
-        $this->login = $login;
-
-        return $this;
-    }
-
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(?string $email): self
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    public function getAdresse(): ?string
-    {
-        return $this->adresse;
-    }
-
-    public function setAdresse(?string $adresse): self
-    {
-        $this->adresse = $adresse;
+        $this->mdp = $mdp;
 
         return $this;
     }
@@ -139,15 +95,10 @@ class Client
         return $this->panier;
     }
 
-    public function setPanier(?Panier $panier): self
+    public function setPanier(Panier $panier): self
     {
-        // unset the owning side of the relation if necessary
-        if ($panier === null && $this->panier !== null) {
-            $this->panier->setClient(null);
-        }
-
         // set the owning side of the relation if necessary
-        if ($panier !== null && $panier->getClient() !== $this) {
+        if ($panier->getClient() !== $this) {
             $panier->setClient($this);
         }
 
@@ -185,19 +136,4 @@ class Client
 
         return $this;
     }
-
-    public function getAdmin(): ?Admin
-    {
-        return $this->admin;
-    }
-
-    public function setAdmin(?Admin $admin): self
-    {
-        $this->admin = $admin;
-
-        return $this;
-    }
-
-   
-    
 }

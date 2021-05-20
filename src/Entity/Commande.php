@@ -18,7 +18,7 @@ class Commande
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=20, nullable=true)
+     * @ORM\Column(type="string", length=50, nullable=true)
      */
     private $prix;
 
@@ -28,21 +28,21 @@ class Commande
     private $date;
 
     /**
-     * @ORM\Column(type="string", length=20, nullable=true)
+     * @ORM\Column(type="string", length=50, nullable=true)
      */
     private $mode_paiement;
 
     /**
-     * @ORM\ManyToOne(targetEntity=panier::class, inversedBy="commandes")
+     * @ORM\ManyToOne(targetEntity=Client::class, inversedBy="commandes")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $panier;
+    private $Client;
 
     /**
-     * @ORM\ManyToOne(targetEntity=client::class, inversedBy="commandes")
+     * @ORM\ManyToOne(targetEntity=Panier::class, inversedBy="commandes")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $client;
+    private $Panier;
 
     public function getId(): ?int
     {
@@ -85,26 +85,26 @@ class Commande
         return $this;
     }
 
-    public function getPanier(): ?panier
+    public function getClient(): ?Client
     {
-        return $this->panier;
+        return $this->Client;
     }
 
-    public function setPanier(?panier $panier): self
+    public function setClient(?Client $Client): self
     {
-        $this->panier = $panier;
+        $this->Client = $Client;
 
         return $this;
     }
 
-    public function getClient(): ?client
+    public function getPanier(): ?Panier
     {
-        return $this->client;
+        return $this->Panier;
     }
 
-    public function setClient(?client $client): self
+    public function setPanier(?Panier $Panier): self
     {
-        $this->client = $client;
+        $this->Panier = $Panier;
 
         return $this;
     }
