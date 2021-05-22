@@ -16,3 +16,7 @@ affichage:
 Gest:
     path: /Gest
     controller: App\Controller\GestProduitController::index
+
+reg:
+    path: /reg
+    controller: App\Controller\RegistrationController::new

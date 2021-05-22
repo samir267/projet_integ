@@ -29,11 +29,7 @@ class Panier
      */
     private $somme;
 
-    /**
-     * @ORM\OneToOne(targetEntity=Client::class, inversedBy="panier", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $Client;
+  
 
     /**
      * @ORM\ManyToOne(targetEntity=Produit::class, inversedBy="paniers")
@@ -45,6 +41,12 @@ class Panier
      * @ORM\OneToMany(targetEntity=Commande::class, mappedBy="Panier", orphanRemoval=true)
      */
     private $commandes;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="paniers")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $User;
 
     public function __construct()
     {
@@ -80,17 +82,7 @@ class Panier
         return $this;
     }
 
-    public function getClient(): ?Client
-    {
-        return $this->Client;
-    }
-
-    public function setClient(Client $Client): self
-    {
-        $this->Client = $Client;
-
-        return $this;
-    }
+   
 
     public function getProduit(): ?Produit
     {
@@ -130,6 +122,18 @@ class Panier
                 $commande->setPanier(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->User;
+    }
+
+    public function setUser(?User $User): self
+    {
+        $this->User = $User;
 
         return $this;
     }

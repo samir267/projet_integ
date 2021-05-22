@@ -32,17 +32,18 @@ class Commande
      */
     private $mode_paiement;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Client::class, inversedBy="commandes")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $Client;
-
+   
     /**
      * @ORM\ManyToOne(targetEntity=Panier::class, inversedBy="commandes")
      * @ORM\JoinColumn(nullable=false)
      */
     private $Panier;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="commandes")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $User;
 
     public function getId(): ?int
     {
@@ -85,17 +86,7 @@ class Commande
         return $this;
     }
 
-    public function getClient(): ?Client
-    {
-        return $this->Client;
-    }
-
-    public function setClient(?Client $Client): self
-    {
-        $this->Client = $Client;
-
-        return $this;
-    }
+   
 
     public function getPanier(): ?Panier
     {
@@ -105,6 +96,18 @@ class Commande
     public function setPanier(?Panier $Panier): self
     {
         $this->Panier = $Panier;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->User;
+    }
+
+    public function setUser(?User $User): self
+    {
+        $this->User = $User;
 
         return $this;
     }

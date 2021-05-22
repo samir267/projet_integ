@@ -11,53 +11,38 @@
        
       </thead>
       <tbody>
+      <div class="row" id="rowCard">
+ {% for prods in prod %}
+            <div class="col-sm-2" id="cardAnimal">
+                <div class="card border-info mb-3 shadow p-3 mb-5" style="width: 11rem;">
+                    <div class="card-header bg-transparent" >
+                     <h5 style="text-align:center;">   {{prods.getNom()}}</h5>
+                    </div>
+                        <div class="card-body text-center">
+                          <img src="{{prods.getImage()}}" width='70px' height='70px'><br>
+                        <span class="badge badge-pill badge-primary"> Prix :   {{prods.getPrix()}} DT <span class="fa fa-thumbs-up"></span></span></ng-container>
+
+                        {% if prods.getQtite() ==0 %}
+                        
+                        <span class="badge badge-pill badge-danger">Disponible <span class="fa fa-thumbs-up"></span></span></ng-container>
+                          {% else %}
+                        <span class="badge badge-pill badge-primary">Disponible <span class="fa fa-thumbs-up"></span></span></ng-container>
+                         {% endif %} 
+
+
+                        </div>
+                    <div class="card-footer  text-center ">
+                        <button type="button" class="btn btn-info" style="float:" >add panier</button>
+                    </div>
+                </div>
+            </div>
+        
+       
+
+
       
-        {% for prods in prod %}
-
-
-       <div class="col-4 pt-3" >
-<div class="card">
-    <div class="card text-center">
-     <div class="card-header">
-           {{prods.getNom() }}
-
-      </div>
-    <div class="card-body">
-<span class="badge badge-pill badge-primary">prix : {{prods.getPrix()}} DT <span class="fa fa-thumbs-up"></span></span></ng-container>
-
-    </div>
-    <div class="card-footer text-muted">
-       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
-  details
-</button>
-<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">details {{prods.getNom()}}</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-<span class="badge badge-pill badge-primary">prix : {{prods.getPrix()}} DT <span class="fa fa-thumbs-up"></span></span></ng-container>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-        
-    </div>
-    <div class="card-footer text-muted">
-        <button type="button" class="btn btn-primary" >ajouter panier</button>
-        
-    </div>
-</div>
-  </div>
-</div>
         {% endfor %}
+        </div>
       </tbody>
     </table>
   {% else %}

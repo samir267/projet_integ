@@ -15,7 +15,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 class GestProduitController extends AbstractController
 {
     /**
-     * @Route("/gest/produit", name="gest_produit")
+     * @Route("/admin/gest/produit", name="gest_produit")
      */
     public function index(): Response
     {
